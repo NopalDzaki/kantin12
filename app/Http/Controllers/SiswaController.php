@@ -204,4 +204,4 @@ class SiswaController extends Controller
         }
     }
 }
-// by nopaldzaki
+// nopaldzaki

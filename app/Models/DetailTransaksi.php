@@ -54,4 +54,4 @@ class DetailTransaksi extends Model
         return $this->belongsTo(Diskon::class, 'diskon_id');
     }
 }
-// by nopaldzaki
+// nopaldzaki

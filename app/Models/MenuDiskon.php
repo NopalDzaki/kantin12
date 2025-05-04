@@ -20,4 +20,4 @@ class MenuDiskon extends Model
         return $this->belongsTo(Diskon::class, 'id_diskon');
     }
 }
-// by nopaldzaki
+// nopaldzaki

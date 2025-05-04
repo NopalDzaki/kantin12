@@ -212,4 +212,4 @@ class StanController extends Controller
         }
     }
 }
-// by nopaldzaki
+// nopaldzaki

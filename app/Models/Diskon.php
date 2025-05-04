@@ -40,4 +40,4 @@ class Diskon extends Model
         return $this->belongsToMany(Menu::class, 'menu_diskon', 'id_diskon', 'id_menu');
     }
 }
-// by nopaldzaki
+// nopaldzaki
