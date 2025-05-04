@@ -245,3 +245,4 @@ class DiskonController extends Controller
         }
     }
 }
+// by nopaldzaki

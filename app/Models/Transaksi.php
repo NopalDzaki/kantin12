@@ -39,3 +39,4 @@ class Transaksi extends Model
         return $this->belongsTo(User::class, 'id_siswa');
     }
 }
+// by nopaldzaki

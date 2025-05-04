@@ -53,3 +53,4 @@ class Menu extends Model
         return $this->hasMany(DetailTransaksi::class, 'id_menu');
     }
 }
+// by nopaldzaki
