@@ -52,4 +52,4 @@ Route::delete('/deleteorder/{id}', [TransaksiController::class, 'destroy']);
 Route::get('/histori-bulan', [TransaksiController::class, 'getHistoriByBulan']); //untuk siswa
 Route::get('/cetak-nota/{id}', [TransaksiController::class, 'cetakNota']);
 Route::get('/pesanan-bulan', [TransaksiController::class, 'getPesananByBulan']); //untuk admin
-Route::get('/rekap-pemasukan', [TransaksiController::class, 'getRekapPemasukan']); //untuk admin
+Route::get('/rekap-pemasukan', [TransaksiController::class, 'getRekapPemasukan']); 
