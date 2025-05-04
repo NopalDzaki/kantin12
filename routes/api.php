@@ -53,12 +53,3 @@ Route::get('/histori-bulan', [TransaksiController::class, 'getHistoriByBulan']);
 Route::get('/cetak-nota/{id}', [TransaksiController::class, 'cetakNota']);
 Route::get('/pesanan-bulan', [TransaksiController::class, 'getPesananByBulan']); //untuk admin
 Route::get('/rekap-pemasukan', [TransaksiController::class, 'getRekapPemasukan']); //untuk admin
-
-// Route untuk admin stan mengelola data siswa
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/siswa', [SiswaController::class, 'index']);
-    Route::get('/siswa/{id}', [SiswaController::class, 'show']);
-    Route::post('/siswa', [SiswaController::class, 'store']);
-    Route::put('/siswa/{id}', [SiswaController::class, 'update']);
-    Route::delete('/siswa/{id}', [SiswaController::class, 'destroy']);
-});
