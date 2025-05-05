@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AuthController extends Controller
 {
@@ -75,6 +77,21 @@ class AuthController extends Controller
         } catch (\Exception ) {
             return response()->json(['error' => 'Gagal memperbarui token'], 400);
         }
+    }
+
+    public function cetakNotaPdf($id)
+    {
+        $transaksi = Transaksi::with(['detailTransaksi.menu', 'siswa', 'stan'])->findOrFail($id);
+
+        $data = [
+            'transaksi' => $transaksi,
+            'total' => $transaksi->detailTransaksi->sum(function($detail) {
+                return $detail->qty * $detail->harga_beli;
+            })
+        ];
+
+        $pdf = Pdf::loadView('nota_pdf', $data);
+        return $pdf->download('nota_transaksi_'.$id.'.pdf');
     }
 }
 // nopaldzaki
