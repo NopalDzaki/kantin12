@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TransaksiController extends Controller
 {
@@ -325,38 +326,25 @@ class TransaksiController extends Controller
         }
     }
 
-    public function cetakNota($id)
-    {
-        try {
-            $user = Auth::user();
-            $transaksi = Transaksi::with(['detailTransaksi.menu', 'siswa', 'stan'])->findOrFail($id);
+    public function cetakNotaPdf($id)
+{
+    $transaksi = Transaksi::with(['siswa', 'stan', 'detailTransaksi.menu', 'diskon'])->find($id);
 
-            if ($user->role === 'siswa' && $transaksi->id_siswa !== $user->siswa->id) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Anda tidak memiliki akses ke transaksi ini'
-                ], 403);
-            }
 
-            $data = [
-                'transaksi' => $transaksi,
-                'total' => $transaksi->detailTransaksi->sum(function($detail) {
-                    return $detail->qty * $detail->harga_beli;
-                })
-            ];
+    $subtotal = $transaksi->detailTransaksi->sum(function($detail) {
+        return $detail->qty * $detail->harga_beli;
+    });
+    
+    $data = [
+        'transaksi' => $transaksi,
+        'subtotal' => $subtotal,
+        'total' => $subtotal
+    ];
+    
 
-            return response()->json([
-                'status' => 'success',
-                'data' => $data,
-                'message' => 'Data nota berhasil diambil'
-            ]);
-        } catch (Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ], 500);
-        }
-    }
+    $pdf = Pdf::loadView('nota_pdf', $data);
+    return $pdf->download('nota_transaksi_'.$id.'.pdf');
+}
 
     public function getPesananByBulan(Request $request)
     {

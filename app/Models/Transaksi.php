@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Transaksi extends Model
 {
     protected $table = 'transaksi';
-    
+
     protected $casts = [
         'tanggal' => 'datetime',
         'status' => 'string'
     ];
-    
+
     protected $fillable = [
         'id_siswa',
         'id_stan',
@@ -37,6 +37,11 @@ class Transaksi extends Model
     public function siswa()
     {
         return $this->belongsTo(User::class, 'id_siswa');
+    }
+
+    public function diskon()
+    {
+        return $this->belongsTo(Diskon::class, 'id_diskon');
     }
 }
 // nopaldzaki

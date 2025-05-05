@@ -28,7 +28,8 @@ class DiskonController extends Controller
 
             $diskon = Diskon::with([
                 'menu' => function ($query) {
-                    $query->select('menu.*')
+                    $query->select('menu.*', 'diskon.persentase_diskon')
+                        ->join('diskon', 'menu_diskon.id_diskon', '=', 'diskon.id')
                         ->addSelect(DB::raw('ROUND(menu.harga - (menu.harga * diskon.persentase_diskon / 100), 2) as harga_setelah_diskon'));
                 },
                 'stan'
@@ -123,7 +124,8 @@ class DiskonController extends Controller
 
             $diskon = Diskon::with([
                 'menu' => function ($query) {
-                    $query->select('menu.*')
+                    $query->select('menu.*', 'diskon.persentase_diskon')
+                        ->join('diskon', 'menu_diskon.id_diskon', '=', 'diskon.id')
                         ->addSelect(DB::raw('ROUND(menu.harga - (menu.harga * diskon.persentase_diskon / 100), 2) as harga_setelah_diskon'));
                 },
                 'stan'

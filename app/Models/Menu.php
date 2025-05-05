@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Menu extends Model
 {
     protected $table = 'menu';
-    
+
     protected $fillable = [
-        'nama_makanan', 
-        'harga', 
-        'jenis', 
-        'foto', 
-        'deskripsi', 
+        'nama_makanan',
+        'harga',
+        'jenis',
+        'foto',
+        'deskripsi',
         'id_stan'
     ];
 
@@ -21,7 +21,6 @@ class Menu extends Model
 
     public function getHargaSetelahDiskonAttribute()
     {
-        // Ambil diskon yang aktif untuk menu ini
         $diskonAktif = $this->diskon()
             ->where('tanggal_awal', '<=', now())
             ->where('tanggal_akhir', '>=', now())
@@ -35,7 +34,6 @@ class Menu extends Model
         return $this->harga;
     }
 
-    // Relasi ke tabel Diskon
     public function diskon()
     {
         return $this->belongsToMany(Diskon::class, 'menu_diskon', 'id_menu', 'id_diskon');

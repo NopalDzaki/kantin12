@@ -50,6 +50,6 @@ Route::post('/tambahitem/{id}', [TransaksiController::class, 'tambahitem']);
 Route::put('/updateorder/{id}', [TransaksiController::class, 'updateStatus']);
 Route::delete('/deleteorder/{id}', [TransaksiController::class, 'destroy']);
 Route::get('/histori-bulan', [TransaksiController::class, 'getHistoriByBulan']); //untuk siswa
-Route::get('/cetak-nota/{id}', [TransaksiController::class, 'cetakNota']);
+Route::get('/cetak-nota-pdf/{id}', [TransaksiController::class, 'cetakNotaPdf']);
 Route::get('/pesanan-bulan', [TransaksiController::class, 'getPesananByBulan']); //untuk admin
 Route::get('/rekap-pemasukan', [TransaksiController::class, 'getRekapPemasukan']); 
